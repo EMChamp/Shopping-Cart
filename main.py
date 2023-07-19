@@ -1,5 +1,5 @@
 from flask import *
-import sqlite3, hashlib, os
+import sqlite3, hashlib, os, sms_api_connector
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
@@ -185,13 +185,14 @@ def updateProfile():
         con.close()
         return redirect(url_for('editProfile'))
 
-@app.route("/loginForm")
+
+@app.route("/loginForm",  methods = ['POST', 'GET'])
 def loginForm():
     if 'email' in session:
         return redirect(url_for('root'))
     else:
         return render_template('login.html', error='')
-
+    
 @app.route("/login", methods = ['POST', 'GET'])
 def login():
     if request.method == 'POST':
@@ -203,6 +204,20 @@ def login():
         else:
             error = 'Invalid UserId / Password'
             return render_template('login.html', error=error)
+        
+@app.route("/verificationForm", methods = ['POST', 'GET'])
+def verificationForm():
+    if request.method == 'POST':
+        otpCode = request.form['otpCode']
+        if otpCode == "abc123":
+            flash("Successfully validated OTP")
+            return redirect(url_for('root'))
+        else:
+            flash('Invalid code! Please try again.', 'error')
+            return render_template("verificationForm.html")
+    else:
+        return render_template("verificationForm.html")
+
 
 @app.route("/productDescription")
 def productDescription():
@@ -289,6 +304,10 @@ def is_valid(email, password):
 
 @app.route("/register", methods = ['GET', 'POST'])
 def register():
+    # Send SMS OTP
+    sms_api_connector.sendOTP()
+
+    # Validate Form
     if request.method == 'POST':
         #Parse form data    
         password = request.form['password']
@@ -315,8 +334,8 @@ def register():
                 con.rollback()
                 msg = "Error occured"
         con.close()
-        return render_template("login.html", error=msg)
-
+        return render_template("verificationForm.html", error=msg)
+        
 @app.route("/registerationForm")
 def registrationForm():
     return render_template("register.html")
