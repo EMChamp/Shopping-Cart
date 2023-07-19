@@ -1,0 +1,29 @@
+<html>
+
+<head>
+    <title>Verification Form</title>
+    <script type="text/javascript" src="{{ url_for('static', filename = 'js/validateForm.js') }}"> </script>
+    <style>
+        .red-text {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="error red-text">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+    <form action="/verificationForm" method="POST">
+        <p>otpCode: <input type="otpCode" name="otpCode"></p>
+        <p><button type="submit" value="Submit Code">Submit Code</p>
+    </form>
+</body>
+
+</html>

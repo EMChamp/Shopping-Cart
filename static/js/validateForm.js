@@ -9,4 +9,13 @@ function validate() {
     }
 }
 
+function validateOTP() {
+    var otpCode = document.getElementById("otpCode").value;
+    if (otpCode == "abc123") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 
