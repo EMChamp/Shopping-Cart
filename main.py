@@ -36,6 +36,10 @@ def root():
     itemData = parse(itemData)   
     return render_template('home.html', itemData=itemData, loggedIn=loggedIn, firstName=firstName, noOfItems=noOfItems, categoryData=categoryData)
 
+@app.route("/checkout")
+def checkout():
+    return render_template("checkout.html")
+
 @app.route("/add")
 def admin():
     with sqlite3.connect('database.db') as conn:
@@ -207,15 +211,13 @@ def login():
         
 @app.route("/verificationForm", methods = ['POST', 'GET'])
 def verificationForm():
-    if request.method == 'POST':
-        otpCode = request.form['otpCode']
-        if otpCode == "abc123":
-            flash("Successfully validated OTP")
-            return redirect(url_for('root'))
-        else:
-            flash('Invalid code! Please try again.', 'error')
-            return render_template("verificationForm.html")
+    otpCode = request.form['otpCode']
+
+    if sms_api_connector.verifyOTP(session['verifySessionId'], otpCode):
+        flash("Successfully validated OTP")
+        return redirect(url_for('root'))
     else:
+        flash('Invalid code! Please try again.', 'error')
         return render_template("verificationForm.html")
 
 
@@ -305,7 +307,8 @@ def is_valid(email, password):
 @app.route("/register", methods = ['GET', 'POST'])
 def register():
     # Send SMS OTP
-    sms_api_connector.sendOTP()
+    session['verifySessionId'] = sms_api_connector.sendOTP()
+    print(session['verifySessionId'])
 
     # Validate Form
     if request.method == 'POST':
