@@ -38,7 +38,13 @@ def root():
 
 @app.route("/checkout")
 def checkout():
+    sms_api_connector.sendSMS()
     return render_template("checkout.html")
+
+
+@app.route("/liveSupport")
+def liveSupport():
+    return render_template("liveSupport.html")
 
 @app.route("/add")
 def admin():

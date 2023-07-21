@@ -13,7 +13,7 @@ def sendSMS():
     payload = {
         "source": "8x8",
         "destination": destination,
-        "text": "From Python Function",
+        "text": "Your order is on its way!",
     }
 
     response = requests.post(url, json=payload, headers=headers)
