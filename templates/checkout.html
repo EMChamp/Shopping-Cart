@@ -5,6 +5,14 @@
     <title>Checkout Page</title>
     <link rel="stylesheet" href={{url_for('static', filename='css/cart.css' )}} />
     <link rel="stylesheet" href={{url_for('static', filename='css/topStyle.css' ) }} />
+    <style>
+        /* Add some padding or margin to create space between the div and the image */
+        .my-div {
+            padding-top: 300px; /* Adjust the value as needed */
+            /* Alternatively, you can use margin-top: 30px; */
+            /* Choose either padding or margin depending on your layout needs */
+        }
+    </style>
 </head>
 
 <body>
@@ -39,7 +47,7 @@
             </a>
         </div>
     </div>
-    <div id="cartItems">
+    <div id="cartItems" class=""my-div>
         <h2>Checkout Page</h2>
         <div id="tableItems">
             <div>
@@ -57,6 +65,7 @@
             </div>
         </div>
     </div>
+    <img src={{url_for('static', filename='uploads/delivery.png' )}} class="my-div"/>
 </body>
 
 </html>

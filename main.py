@@ -22,6 +22,7 @@ def getLoginDetails():
             cur.execute("SELECT count(productId) FROM kart WHERE userId = ?", (userId, ))
             noOfItems = cur.fetchone()[0]
     conn.close()
+    
     return (loggedIn, firstName, noOfItems)
 
 @app.route("/")
@@ -41,6 +42,9 @@ def checkout():
     sms_api_connector.sendSMS()
     return render_template("checkout.html")
 
+@app.route("/queuePage")
+def queuePage():
+    return render_template("queuePage.html")
 
 @app.route("/liveSupport")
 def liveSupport():

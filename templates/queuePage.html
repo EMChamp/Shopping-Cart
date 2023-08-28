@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Queue Status</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .content {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            font-size: 36px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <h1>Live Support</h1>
+        <p>You are 1st in the queue to speak to an agent</p>
+        <img src={{url_for('static', filename='uploads/jitsi.png' )}} alt="Queue Image">
+    </div>
+
+    <!-- Add the progress bar here -->
+    <div class="progress-container">
+        <progress max="100" value="0"></progress>
+        <p>Queue Progress</p>
+    </div>
+
+
+    <script>
+        // Simulate queue progress (for demonstration purposes)
+        let progressValue = 0;
+        const progressBar = document.querySelector('progress');
+
+        function simulateQueueProgress() {
+            if (progressValue < 100) {
+                progressValue += 10;
+                progressBar.value = progressValue;
+                setTimeout(simulateQueueProgress, 1000);
+            }
+        }
+
+        simulateQueueProgress();
+    </script>
+     <script>
+        // Wait for 5 seconds, then redirect to the destination page
+        setTimeout(function () {
+            window.location.href = "{{ url_for('liveSupport') }}";
+        }, 5000);
+    </script>
+</body>
+</html>

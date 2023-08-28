@@ -22,7 +22,6 @@ def sendSMS():
 
 
 def sendOTP():
-    print("send OTP")
     url = "https://sms.8x8.com/api/v2/subaccounts/RSCompany_6lLA8_hq/sessions"
 
     payload = {
