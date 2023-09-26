@@ -1,5 +1,5 @@
 # Shopping Cart  
-A simple E-commerce website using Flask.
+This ecommerce example is modified to show how to use 8x8's SMS and Video APIs.
   
 ## Dependencies ##
 1. Python3
