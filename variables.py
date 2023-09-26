@@ -1,1 +1,1 @@
-BearerToken = "Qg9iHxj0HqHoHQoxLcHO73f2ifGBqEmiCLg6QaIuhqc"
+BearerToken = "djnLfks2KHazzLEmdYe8MIS3lz1VQN4Q0jsu7l9jSo"

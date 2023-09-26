@@ -1,6 +1,6 @@
 import requests, variables
 destination = "6597209504"
-
+subaccount = "InternalDemoCPaaS_8dD15_hq"
 headers = {
         "accept": "application/json",
         "content-type": "application/json",
@@ -8,7 +8,7 @@ headers = {
 }
 
 def sendSMS():
-    url = "https://sms.8x8.com/api/v1/subaccounts/RSCompany_6lLA8_hq/messages"
+    url = f"https://sms.8x8.com/api/v1/subaccounts/{subaccount}/messages"
 
     payload = {
         "source": "8x8",
@@ -22,7 +22,7 @@ def sendSMS():
 
 
 def sendOTP():
-    url = "https://sms.8x8.com/api/v2/subaccounts/RSCompany_6lLA8_hq/sessions"
+    url = f"https://sms.8x8.com/api/v2/subaccounts/{subaccount}/sessions"
 
     payload = {
         "destination": destination,
@@ -38,7 +38,7 @@ def sendOTP():
 
 
 def verifyOTP(sessionID, otpCode):
-    url = "https://verify.8x8.com/api/v2/subaccounts/RSCompany_6lLA8_hq/sessions/" + sessionID + "?code=" + otpCode
+    url = f"https://verify.8x8.com/api/v2/subaccounts/{subaccount}/sessions/" + sessionID + "?code=" + otpCode
 
     response = requests.get(url, headers=headers)
     response_data = response.json()

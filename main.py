@@ -46,6 +46,10 @@ def checkout():
 def queuePage():
     return render_template("queuePage.html")
 
+@app.route("/salesforceChat")
+def salesforceChat():
+    return render_template("salesforceChat.html")
+
 @app.route("/liveSupport")
 def liveSupport():
     return render_template("liveSupport.html")
@@ -371,4 +375,4 @@ def parse(data):
     return ans
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=5002, debug=True)

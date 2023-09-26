@@ -1,33 +1,50 @@
-<!DOCTYPE HTML>
-<html>
 
-<head>
-    <script src='https://8x8.vc/vpaas-magic-cookie-dc33d64962164425976f51eac7238b1b/external_api.js' async></script>
-    <style>
-        html,
-        body,
-        #jaas-container {
-            height: 100%;
-        }
-    </style>
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src='https://8x8.vc/vpaas-magic-cookie-60d15ff098c04d71aa5fe31e06bf866e/external_api.js' async></script>
+    <style>html, body, #jaas-container { height: 100%; }</style>
     <script type="text/javascript">
-        window.onload = () => {
-            const api = new JitsiMeetExternalAPI("8x8.vc", {
-                roomName: "vpaas-magic-cookie-dc33d64962164425976f51eac7238b1b/SampleAppPassivePublishingsHauntGrimly",
-                parentNode: document.querySelector('#jaas-container'),
-                // Make sure to include a JWT if you intend to record,
-                // make outbound calls or use any other premium features!
-                // jwt: "eyJraWQiOiJ2cGFhcy1tYWdpYy1jb29raWUtZGMzM2Q2NDk2MjE2NDQyNTk3NmY1MWVhYzcyMzhiMWIvY2I1MTYxLVNBTVBMRV9BUFAiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJqaXRzaSIsImlzcyI6ImNoYXQiLCJpYXQiOjE2ODk5MDk1MDcsImV4cCI6MTY4OTkxNjcwNywibmJmIjoxNjg5OTA5NTAyLCJzdWIiOiJ2cGFhcy1tYWdpYy1jb29raWUtZGMzM2Q2NDk2MjE2NDQyNTk3NmY1MWVhYzcyMzhiMWIiLCJjb250ZXh0Ijp7ImZlYXR1cmVzIjp7ImxpdmVzdHJlYW1pbmciOmZhbHNlLCJvdXRib3VuZC1jYWxsIjpmYWxzZSwic2lwLW91dGJvdW5kLWNhbGwiOmZhbHNlLCJ0cmFuc2NyaXB0aW9uIjpmYWxzZSwicmVjb3JkaW5nIjpmYWxzZX0sInVzZXIiOnsiaGlkZGVuLWZyb20tcmVjb3JkZXIiOmZhbHNlLCJtb2RlcmF0b3IiOnRydWUsIm5hbWUiOiJUZXN0IFVzZXIiLCJpZCI6Imdvb2dsZS1vYXV0aDJ8MTA0OTcxNzUyMjUxNDIwNjkyODc0IiwiYXZhdGFyIjoiIiwiZW1haWwiOiJ0ZXN0LnVzZXJAY29tcGFueS5jb20ifX0sInJvb20iOiIqIn0.ON-aW2bQz95Gx0Ot9fCU_0BiJSvEAjpsJkPPpIE8eFRO8rXy857-WWU39T43mSonlO3OixFUmnplWvDmO_2XJt0MeNg902kjI4-es5Qt0xGEmzMb8WH9UOzFn70Lwjyv7P5YONNz2pBa23wJntJWw7sygeDEiYdSbLUGp5p1_bS-XR0JNqdJzSJohPiPsftFlgt6yzbdJsUewpih47_RgkgbhYXvsFgFhPSa1RuUOnH0Ugey-_xhMVGhHwRZ7ZqXMgxCe7LKEkFXphe-HDd8LGsGAABsxCWj-OoJSqW2_kclPi_CsH-73tKLARETxjRSLkmlNBIpvR-xS-kYFBrs9A"
-            });
-        }
+      let api;
+      window.onload = () => {
+        const options = {
+          roomName: "vpaas-magic-cookie-60d15ff098c04d71aa5fe31e06bf866e/SSSSampleAppSystematicSpansTagPromptly",
+          configOverwrite: {
+            requireDisplayName: false,
+            prejoinConfig: {hideDisplayName: true}
+          },
+          parentNode: document.querySelector('#jaas-container'),
+                        // Make sure to include a JWT if you intend to record,
+                        // make outbound calls or use any other premium features!
+                        // jwt: "eyJraWQiOiJ2cGFhcy1tYWdpYy1jb29raWUtNjBkMTVmZjA5OGMwNGQ3MWFhNWZlMzFlMDZiZjg2NmUvYThlYjhhLVNBTVBMRV9BUFAiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJqaXRzaSIsImlzcyI6ImNoYXQiLCJpYXQiOjE2OTM0NzQxOTIsImV4cCI6MTY5MzQ4MTM5MiwibmJmIjoxNjkzNDc0MTg3LCJzdWIiOiJ2cGFhcy1tYWdpYy1jb29raWUtNjBkMTVmZjA5OGMwNGQ3MWFhNWZlMzFlMDZiZjg2NmUiLCJjb250ZXh0Ijp7ImZlYXR1cmVzIjp7ImxpdmVzdHJlYW1pbmciOmZhbHNlLCJvdXRib3VuZC1jYWxsIjpmYWxzZSwic2lwLW91dGJvdW5kLWNhbGwiOmZhbHNlLCJ0cmFuc2NyaXB0aW9uIjpmYWxzZSwicmVjb3JkaW5nIjpmYWxzZX0sInVzZXIiOnsiaGlkZGVuLWZyb20tcmVjb3JkZXIiOmZhbHNlLCJtb2RlcmF0b3IiOnRydWUsIm5hbWUiOiJUZXN0IFVzZXIiLCJpZCI6Imdvb2dsZS1vYXV0aDJ8MTEyODA4MTE1Nzc5MTQ2Mzc4Mjg2IiwiYXZhdGFyIjoiIiwiZW1haWwiOiJ0ZXN0LnVzZXJAY29tcGFueS5jb20ifX0sInJvb20iOiIqIn0.eYEOS5r-r1CGU158Z5WSC5PU7hn6_K3ZUX6b7TtHskmyFJQdLH4HKhrbowq1JQgMEbO3witQ5ch6CUhI2nAlgbD86Oi_k0jHBryaY52f1vIev4B0Mr_O5ogUdJYqZpfeLu21q-G8QAGIJ2zKJu33Y8vbpcJdwkpL1cmwlDSOBPNrnteBwUP8lWG1sIku2bju3isa4Fejn43zFwKx0eQJWNJhb0_YG14ztSUwDi8fPvLyIH-34abtrG6DICXZcyEClx4mquAHlyiSyqS8kFsNMQwt5ecBXRds5AbYG1wQLvUENAkjLrjPN1zL9psve1jTeQVJWKczeGbBqnIbaKsQmA"
+        };
+        api = new JitsiMeetExternalAPI("8x8.vc", options);
+      }
     </script>
     <title>Live Support</title>
     <link rel="stylesheet" href={{url_for('static', filename='css/cart.css' )}} />
     <link rel="stylesheet" href={{url_for('static', filename='css/topStyle.css' ) }} />
-</head>
+  </head>
+  <body>
+    <script>
+      console.log("Rommel Hello");
+      function captureScreenshot() {
+            if (api) {
+                api.captureLargeVideoScreenshot().then(data => {
+                    // data is an Object with only one param, dataURL
+                    // data.dataURL contains the base64-encoded image
 
-<body>
+                    // Add a print line here to log the dataURL
+                    console.log("Data URL:", data.dataURL);
+
+                    // You can also perform additional operations with the dataURL here if needed.
+                });
+            } else {
+                console.error("API not initialized");
+            }
+        }
+    </script>
     <div id="jaas-container" />
-</body>
-
+    <button onclick="captureScreenshot()">Capture Screenshot</button>
+  </body>
 </html>
