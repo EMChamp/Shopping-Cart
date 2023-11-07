@@ -39,7 +39,7 @@ def root():
 
 @app.route("/checkout")
 def checkout():
-    sms_api_connector.sendSMS()
+    sms_api_connector.sendSMS(session['phone_number'])
     return render_template("checkout.html")
 
 @app.route("/queuePage")
@@ -320,10 +320,6 @@ def is_valid(email, password):
 
 @app.route("/register", methods = ['GET', 'POST'])
 def register():
-    # Send SMS OTP
-    session['verifySessionId'] = sms_api_connector.sendOTP()
-    print(session['verifySessionId'])
-
     # Validate Form
     if request.method == 'POST':
         #Parse form data    
@@ -338,6 +334,12 @@ def register():
         state = request.form['state']
         country = request.form['country']
         phone = request.form['phone']
+
+        # Send SMS OTP
+        session['verifySessionId'] = sms_api_connector.sendOTP(phone)
+        print(session['verifySessionId'])
+        session['phone_number'] = phone
+
 
         with sqlite3.connect('database.db') as con:
             try:

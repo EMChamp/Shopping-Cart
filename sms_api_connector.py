@@ -1,5 +1,4 @@
 import requests, variables
-destination = variables.destination
 subaccount = variables.subaccount
 senderId = variables.senderId
 
@@ -9,12 +8,12 @@ headers = {
         "Authorization": "Bearer " + variables.BearerToken
 }
 
-def sendSMS():
+def sendSMS(phone_number):
     url = f"https://sms.8x8.com/api/v1/subaccounts/{subaccount}/messages"
 
     payload = {
         "source": senderId,
-        "destination": destination,
+        "destination": phone_number,
         "text": "Your order is on its way!",
     }
 
@@ -23,11 +22,11 @@ def sendSMS():
 
 
 
-def sendOTP():
+def sendOTP(phone_number):
     url = f"https://sms.8x8.com/api/v2/subaccounts/{subaccount}/sessions"
 
     payload = {
-        "destination": destination,
+        "destination": phone_number,
         "sms": {
             "source": senderId,
             "encoding": "AUTO"
