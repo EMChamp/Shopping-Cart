@@ -1,1 +1,4 @@
-BearerToken = "djnLfks2KHazzLEmdYe8MIS3lz1VQN4Q0jsu7l9jSo"
+BearerToken = ""
+destination = "6597209504"
+subaccount = "InternalDemoCPaaS_8dD15_hq"
+senderId = "8x8"

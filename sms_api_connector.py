@@ -1,6 +1,8 @@
 import requests, variables
-destination = "6597209504"
-subaccount = "InternalDemoCPaaS_8dD15_hq"
+destination = variables.destination
+subaccount = variables.subaccount
+senderId = variables.senderId
+
 headers = {
         "accept": "application/json",
         "content-type": "application/json",
@@ -11,7 +13,7 @@ def sendSMS():
     url = f"https://sms.8x8.com/api/v1/subaccounts/{subaccount}/messages"
 
     payload = {
-        "source": "8x8",
+        "source": senderId,
         "destination": destination,
         "text": "Your order is on its way!",
     }
@@ -27,7 +29,7 @@ def sendOTP():
     payload = {
         "destination": destination,
         "sms": {
-            "source": "8x8",
+            "source": senderId,
             "encoding": "AUTO"
         }
     }
