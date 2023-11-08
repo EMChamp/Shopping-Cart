@@ -1,3 +1,5 @@
 BearerToken = ""
-subaccount = "InternalDemoCPaaS_8dD15_hq"
-senderId = "8x8"
+sms_subaccount = ""
+voice_subaccount = ""
+sms_sender_id = ""
+voice_caller_number = ""

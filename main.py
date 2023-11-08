@@ -1,5 +1,5 @@
 from flask import *
-import sqlite3, hashlib, os, sms_api_connector
+import sqlite3, hashlib, os, cpaas_api_connector
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
@@ -39,7 +39,8 @@ def root():
 
 @app.route("/checkout")
 def checkout():
-    sms_api_connector.sendSMS(session['phone_number'])
+    cpaas_api_connector.sendSMS(session['phone_number'])
+    cpaas_api_connector.makeCall(session['phone_number'])
     return render_template("checkout.html")
 
 @app.route("/queuePage")
@@ -227,7 +228,7 @@ def login():
 def verificationForm():
     otpCode = request.form['otpCode']
 
-    if sms_api_connector.verifyOTP(session['verifySessionId'], otpCode):
+    if cpaas_api_connector.verifyOTP(session['verifySessionId'], otpCode):
         flash("Successfully validated OTP")
         return redirect(url_for('root'))
     else:
@@ -336,8 +337,7 @@ def register():
         phone = request.form['phone']
 
         # Send SMS OTP
-        session['verifySessionId'] = sms_api_connector.sendOTP(phone)
-        print(session['verifySessionId'])
+        session['verifySessionId'] = cpaas_api_connector.sendOTP(phone)
         session['phone_number'] = phone
 
 
