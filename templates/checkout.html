@@ -5,10 +5,11 @@
     <title>Checkout Page</title>
     <link rel="stylesheet" href={{url_for('static', filename='css/cart.css' )}} />
     <link rel="stylesheet" href={{url_for('static', filename='css/topStyle.css' ) }} />
+    <link rel="stylesheet" href={{ url_for('static', filename='css/userRegistration.css') }} />
     <style>
         /* Add some padding or margin to create space between the div and the image */
         .my-div {
-            padding-top: 300px; /* Adjust the value as needed */
+            padding-top: 50px; /* Adjust the value as needed */
             /* Alternatively, you can use margin-top: 30px; */
             /* Choose either padding or margin depending on your layout needs */
         }
@@ -16,56 +17,57 @@
 </head>
 
 <body>
-    <div id="title">
-        <a href="/">
-            <img id="logo" src={{ url_for('static', filename='images/logo.png' ) }} />
-        </a>
-        <form>
-            <input id="searchBox" type="text" name="searchQuery">
-            <input id="searchButton" type="submit" value="Search">
-        </form>
-
-        {% if not loggedIn %}
-        <div id="signInButton">
-            <a class="link" href="/loginForm">Sign In</a>
-        </div>
-        {% else %}
-        <div class="dropdown">
-            <button class="dropbtn">Hello, <br>{{firstName}}</button>
-            <div class="dropdown-content">
-                <a href="/account/orders">Your orders</a>
-                <a href="/account/profile">Your profile</a>
-                <hr>
-                <a href="/logout">Sign Out</a>
-            </div>
-        </div>
-        {% endif %}
-        <div id="kart">
-            <a class="link" href="/cart">
-                <img src={{url_for('static', filename='images/shoppingCart.png' )}} id="cartIcon" />
-                CART {{noOfItems}}
+        <div id="title">
+            <a href="/">
+                <img id="logo" src={{ url_for('static', filename='images/logo.png' ) }} />
             </a>
-        </div>
-    </div>
-    <div id="cartItems" class=""my-div>
-        <h2>Checkout Page</h2>
-        <div id="tableItems">
-            <div>
-                <hr id="seperator">
-                <div id="itemImage">
-                    <img src={{url_for('static', filename='uploads/Kinkaku_Ji_by_Elizabeth_K_Joseph.jpg' )}} id="image" />
-                </div>
-                <div id="itemName">
-                    <span id="itemNameTag">T Shirt</span><br>
+            <form>
+                <input id="searchBox" type="text" name="searchQuery">
+                <input id="searchButton" type="submit" value="Search">
+            </form>
+
+            {% if not loggedIn %}
+            <div id="signInButton">
+                <a class="link" href="/loginForm">Sign In</a>
+            </div>
+            {% else %}
+            <div class="dropdown">
+                <button class="dropbtn">Hello, <br>{{firstName}}</button>
+                <div class="dropdown-content">
+                    <a href="/account/profile">Your profile</a>
+                    <hr>
+                    <a href="/logout">Sign Out</a>
                 </div>
             </div>
-            <hr id="seperator">
-            <div id="total">
-                <span id="subtotal">Subtotal</span> : $550.00
+            {% endif %}
+            <div id="kart">
+                <a class="link" href="/cart">
+                    <img src={{url_for('static', filename='images/shoppingCart.png' )}} id="cartIcon" />
+                    CART {{noOfItems}}
+                </a>
+            </div>
+        </div>
+        <div class="container">
+            <div id="cartItems" class="my-div">
+                <h2>Checkout Page</h2>
+                <div id="tableItems">
+                    <div>
+                        <hr id="seperator">
+                        <div id="itemImage">
+                            <img src={{url_for('static', filename='uploads/Kinkaku_Ji_by_Elizabeth_K_Joseph.jpg' )}} id="image" />
+                        </div>
+                        <div id="itemName">
+                            <span id="itemNameTag">T Shirt</span><br>
+                        </div>
+                    </div>
+                    <hr id="seperator">
+                    <div id="total">
+                        <span id="subtotal">Subtotal</span> : $550.00
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <img src={{url_for('static', filename='uploads/delivery.png' )}} class="my-div"/>
 </body>
 
 </html>

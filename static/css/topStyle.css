@@ -8,29 +8,69 @@
 	float: left;
 }
 
+
 #title {
-	background-color: black;
-	display: inline-block;
-	width: 100%;
+    background-color: #333;
+    padding: 10px 20px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #searchBox {
-	height: 20px;
-	width: 800px;
-	margin-left: 20px;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	margin-right: 20px;
-	float: left;
-	font-size: 1.5em;
+    padding: 8px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
 }
 
-#searchButton {
-	height: 25px;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	margin-right: 20px;
-	float: left;
+#kart, #liveSupport {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+#rightButtons {
+    display: flex;
+    align-items: center;
+}
+.button {
+    background-color: #98130c;
+    color: #fff;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.button a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.button:hover {
+    background-color: #006400; /* Darker green on hover */
+}
+
+#searchBox, #searchButton, #signInButton, .button {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#searchButton, #signInButton {
+    background-color: #98130c;
+    color: #fff;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#searchButton:hover, #signInButton:hover {
+    background-color: #006400; /* Darker green on hover */
 }
 
 .dropbtn {
@@ -73,22 +113,8 @@
 	background-color: gray;
 }
 
-#signInButton {
-	color: yellow;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	margin-left: 20px;
-	margin-right: 20px;
-	float: left;
-}
-#kart {
-	color: white;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	margin-left: 20px;
-	margin-right: 20px;
-	float: left;
-}
+
+
 
 #cartIcon {
 	height: 30px;

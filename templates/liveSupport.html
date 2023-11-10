@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href={{url_for('static', filename='css/topStyle.css' ) }} />
     <script src='https://8x8.vc/vpaas-magic-cookie-60d15ff098c04d71aa5fe31e06bf866e/external_api.js' async></script>
     <style>html, body, #jaas-container { height: 100%; }</style>
     <script type="text/javascript">
@@ -15,5 +16,12 @@
       }
     </script>
   </head>
-  <body><div id="jaas-container" /></body>
+  <body>
+    <div id="title">
+      <a href="/">
+          <img id="logo" src={{ url_for('static', filename='images/logo.png' ) }} />
+      </a>
+    </div>
+    <div id="jaas-container" />
+  </body>
 </html>

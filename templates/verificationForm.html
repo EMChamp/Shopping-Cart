@@ -2,6 +2,8 @@
 
 <head>
     <title>Verification Form</title>
+    <link rel="stylesheet" href={{ url_for('static', filename='css/topStyle.css') }} />
+    <link rel="stylesheet" href={{ url_for('static', filename='css/userRegistration.css') }} />
     <script type="text/javascript" src="{{ url_for('static', filename = 'js/validateForm.js') }}"> </script>
     <style>
         .red-text {
@@ -11,6 +13,12 @@
 </head>
 
 <body>
+    <div id="title">
+		<a href="/">
+			<img id="logo" src= {{ url_for('static', filename='images/logo.png') }} />
+		</a>
+	</div>
+    <div class="container">
     <h2>OTP Verification</h2>
 
     {% with messages = get_flashed_messages() %}
@@ -26,6 +34,7 @@
         <p>otpCode: <input type="otpCode" name="otpCode"></p>
         <p><button type="submit" value="Submit Code">Submit Code</p>
     </form>
+    </div>
 </body>
 
 </html>
