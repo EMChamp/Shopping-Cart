@@ -8,6 +8,9 @@ UPLOAD_FOLDER = 'static/uploads'
 ALLOWED_EXTENSIONS = set(['jpeg', 'jpg', 'png', 'gif'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+# Add config for development/production
+app.config.from_object('config.DevelopmentConfig' if os.environ.get('FLASK_ENV') == 'development' else 'config.ProductionConfig')
+
 def getLoginDetails():
     with sqlite3.connect('database.db') as conn:
         cur = conn.cursor()
@@ -63,6 +66,10 @@ def admin():
         categories = cur.fetchall()
     conn.close()
     return render_template('add.html', categories=categories)
+
+@app.route('/error')
+def trigger_error():
+    1 / 0  # This will cause a ZeroDivisionError for debugging.
 
 @app.route("/addItem", methods=["GET", "POST"])
 def addItem():
@@ -229,7 +236,7 @@ def verificationForm():
     otpCode = request.form['otpCode']
 
     if cpaas_api_connector.verifyOTP(session['verifySessionId'], otpCode):
-        flash("Successfully validated OTP")
+        flash("Successfully validated OTP and created account, Please Sign In")
         return redirect(url_for('root'))
     else:
         flash('Invalid code! Please try again.', 'error')
@@ -377,4 +384,4 @@ def parse(data):
     return ans
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(host='0.0.0.0', port=5001)
