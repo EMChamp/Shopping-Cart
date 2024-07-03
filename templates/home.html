@@ -1,95 +1,168 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Welcome</title>
-<link rel="stylesheet" href={{ url_for('static', filename='css/home.css') }} />
-<link rel="stylesheet" href={{ url_for('static', filename='css/topStyle.css') }} />
+    <title>Welcome</title>
+    <link rel="stylesheet" href={{ url_for('static', filename='css/home.css') }} />
+    <link rel="stylesheet" href={{ url_for('static', filename='css/topStyle.css') }} />
+    <style>
+        /* Add this CSS for the button and the content window */
+        #toggleButton {
+            position: absolute;
+            top: 10px;
+            left: 200px;
+            padding: 10px 20px;
+            background-color: #98130c;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #contentWindow {
+            display: none; /* Initially hidden */
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 25%; /* Covers a quarter of the page */
+            height: 25%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        #contentWindow p {
+            margin-top: 30px;
+        }
+
+        #title {
+            display: flex;
+            align-items: center;
+            padding-left: 80px; /* Ensure content starts after the button */
+        }
+
+        #closeButton {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-	{% with messages = get_flashed_messages() %}
-	{% if messages %}
-		<div class="error green-text">
-			{% for message in messages %}
-				{{ message }}
-			{% endfor %}
-		</div>
-	{% endif %}
-{% endwith %}
-<div id="title">
-	<a href="/">
-		<img id="logo" src= {{ url_for('static', filename='images/logo.png') }} />
-	</a>
-	<form>
-		<input id="searchBox" type="text" name="searchQuery">
-		<input id="searchButton" type="submit" value="Search">
-	</form>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="error green-text">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
+    <div id="title">
+        <!-- Button to toggle the content window -->
+        <button id="toggleButton">8x8 SE/AE? Click Here!</button>
+        <a href="/">
+            <img id="logo" src={{ url_for('static', filename='images/logo.png') }} />
+        </a>
+        <form>
+            <input id="searchBox" type="text" name="searchQuery">
+            <input id="searchButton" type="submit" value="Search">
+        </form>
 
-	<div id="rightButtons">
-		{% if not loggedIn %}
-		<div id="signInButton">
-			<a class="link" href="/loginForm">Sign In</a>
-		</div>
-		{% else %}
-		<div class="dropdown">
-			<button class="button">Account</br></button>
-			<div class="dropdown-content">
-				<a href="/account/profile">Your profile</a>
-				<hr>
-				<a href="/logout">Sign Out</a>
-			</div>
-		</div>
-		<div id="liveSupport" class="button">
-			<a class="link" href="/queuePage">Live Support</a>
-		</div>
-		<div id="kart" class="button">
-			<a class="link" href="/cart">
-				<img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />
-				CART {{noOfItems}}
-			</a>
-		</div>
-		{% endif %}
+        <div id="rightButtons">
+            {% if not loggedIn %}
+            <div id="signInButton">
+                <a class="link" href="/loginForm">Sign In</a>
+            </div>
+            {% else %}
+            <div class="dropdown">
+                <button class="button">Account</br></button>
+                <div class="dropdown-content">
+                    <a href="/account/profile">Your profile</a>
+                    <hr>
+                    <a href="/logout">Sign Out</a>
+                </div>
+            </div>
+            <div id="liveSupport" class="button">
+                <a class="link" href="/queuePage">Live Support</a>
+            </div>
+            <div id="kart" class="button">
+                <a class="link" href="/cart">
+                    <img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />
+                    CART {{noOfItems}}
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="display">
+        <div class="displayCategory">
+            <h2>Shop by Category </h2>
+            <ul>
+                {% for row in categoryData %}
+                <li><a href="/displayCategory?categoryId={{row[0]}}">{{row[1]}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            <h2>Recommended Items</h2>
+            {% for data in itemData %}
+            <table>
+                <tr id="productName">
+                    {% for row in data %}
+                    <td>
+                        {{row[1]}}
+                    </td>
+                    {% endfor %}
+                </tr>
+                <tr id="productImage">
+                    {% for row in data %}
+                    <td>
+                        <a href="/productDescription?productId={{row[0]}}">
+                            <img src={{ url_for('static', filename='uploads/' + row[4]) }} id="itemImage" />
+                        </a>
+                    </td>
+                    {% endfor %}
+                </tr>
+                <tr id="productPrice">
+                    {% for row in data %}
+                    <td>
+                        ${{row[2]}}
+                    </td>
+                    {% endfor %}
+                </tr>
+            </table>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Content window to display some text -->
+	<div id="contentWindow">
+		<button id="closeButton">X</button>
+		<p>Please see <a href="https://docs.google.com/presentation/d/16mu_Ng8pKQ3Rj0GR_6is5rSd8lufVI5k/edit?usp=sharing&ouid=112808115779146378286&rtpof=true&sd=true" target="_blank">this page</a> for step-by-step instructions on how to demo this website. Refer to the walkthrough video for the eCommerce demo or the slides for instructions.</p>
+		<p>Please note that some SMS/Voice Calls may fail depending on the destination country if the route is not setup. Reach out to <a href="mailto:rommel.sunga@8x8.com">rommel.sunga@8x8.com</a> if you encounter any issues.</p>
 	</div>
-</div>
-<div class="display">
-	<div class="displayCategory">
-		<h2>Shop by Category </h2>
-		<ul>
-			{% for row in categoryData %}
-			<li><a href="/displayCategory?categoryId={{row[0]}}">{{row[1]}}</a></li>
-			{% endfor %}
-		</ul>
-	</div>
-	<div>
-		<h2>Recommended Items</h2>
-		{% for data in itemData %}
-		<table>
-			<tr id="productName">
-				{% for row in data %}
-				<td>
-					{{row[1]}}
-				</td>
-				{% endfor %}
-			</tr>
-			<tr id="productImage">
-				{% for row in data %}
-				<td>
-					<a href="/productDescription?productId={{row[0]}}">
-						<img src={{ url_for('static', filename='uploads/' + row[4]) }} id="itemImage" />
-					</a>
-				</td>
-				{% endfor %}
-			</tr>
-			<tr id="productPrice">
-				{% for row in data %}
-				<td>
-					${{row[2]}}
-				</td>
-				{% endfor %}
-			</tr>
-		</table>
-		{% endfor %}
-	</div>
-</div>
+
+    <script>
+        // JavaScript to toggle the content window
+        document.getElementById('toggleButton').addEventListener('click', function() {
+            var contentWindow = document.getElementById('contentWindow');
+            if (contentWindow.style.display === 'none' || contentWindow.style.display === '') {
+                contentWindow.style.display = 'block';
+            } else {
+                contentWindow.style.display = 'none';
+            }
+        });
+
+        // JavaScript to close the content window
+        document.getElementById('closeButton').addEventListener('click', function() {
+            document.getElementById('contentWindow').style.display = 'none';
+        });
+    </script>
 </body>
 </html>
-
